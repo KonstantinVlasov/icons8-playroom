@@ -1,0 +1,41 @@
+# dependencies
+node_modules
+
+# db data
+data.json
+
+# logs
+npm-debug.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
+
+# JetBrains files
+.idea
+
+# local envs
+config/local.env.js
+
+# webpack cache
+.cache
+.cache/locale
+
+# project cache
+cache/*.json
+
+.DS_Store
+*.DS_Store
+
+# Visual Studio Code
+.vscode
+
+# Visual Studio Code history plugin
+.history
+
+jsconfig.json
+
+# Translations cache
+cache/locale/*.json
