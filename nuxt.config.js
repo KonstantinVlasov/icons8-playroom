@@ -3,6 +3,7 @@
 const favicon = '/vue-static/playroom/icons8-dice-'
 
 const config = {
+  mode: 'spa',
   server: {
     host: process.env.HOST || '127.0.0.1'
   },
