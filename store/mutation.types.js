@@ -2,3 +2,8 @@
 
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
+
+export const WORKFLOW_CHANGED = 'WORKFLOW_CHANGED'
+export const CHAT_LOADED = 'CHAT_LOADED'
+export const ROOM_LOADED = 'ROOM_LOADED'
+export const SUSPECTS_LOADED = 'SUSPECTS_LOADED'

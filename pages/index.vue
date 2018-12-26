@@ -1,9 +1,19 @@
 <template lang="pug">
   .index-page
-    h1 hello {{ user }}
-    app-room(:id="'public'" :title="'Public'")
-    app-room(:id="user.room.id" :title="user.room.title")
-    login-form
+    .content
+      .header
+        .logo(v-html="$icons.logo")
+        .logo-title Icons8 Playroom
+      app-suspects(:room="room")
+      workflow-selector
+    app-room.is-public(
+      v-if="workflow === 'public'"
+      :room="chat"
+    )
+    app-room.is-private(
+      v-if="workflow === 'private'"
+      :room="room"
+    )
 </template>
 
 <script>
@@ -13,13 +23,14 @@ export default {
   name: 'IndexPage',
   data () {
     return {
-      message: '',
-      messages: []
     }
   },
   computed: {
     ...mapState({
-      user: (state) => state.user
+      user: (state) => state.user,
+      chat: (state) => state.chat,
+      room: (state) => state.room,
+      workflow: (state) => state.workflow
     })
   },
   watch: {
@@ -28,30 +39,57 @@ export default {
     }
   },
   mounted () {
-    this.$socket.on('chat:message', msg => {
-      this.messages.push(msg)
-    })
+    console.log('user login')
+    const user = JSON.parse(window.localStorage.getItem('playroom.user'))
+    if (user.name) {
+      this.$socket.emit('user:login', {
+        name: user.name,
+        role: user.role
+      })
+    }
   },
   methods: {
-    sendMessage () {
-      console.log('send text:', this.message)
-      if (this.message) {
-        this.$socket.emit('chat:message', {
-          user: this.user,
-          message: this.message
-        })
-      }
-      return false
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+  @import '../assets/variables';
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 320px;
+    bottom: 0;
+    overflow-y: auto;
+    background: linear-gradient(135deg, #fcc419, #ffe066);
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    height: 56px;
+    padding: 0 1rem;
+  }
+  .logo {
+    width: 30px;
+    height: 30px;
+    fill: white;
+    margin-right: 0.5rem;
+  }
+  .logo-title {
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+  }
   .message-form {
     position: fixed;
     bottom: 0;
     width: 100%;
     padding: 4px;
+  }
+  .workflow-selector {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
   }
 </style>

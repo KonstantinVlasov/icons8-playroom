@@ -1,11 +1,14 @@
 <template lang="pug">
   .login-form
     form(@submit.prevent="login")
-      input(v-model="user.name" placeholder="Name")
-      select(v-model="user.role")
-        option(v-for="option in rooms" :value="option.id") {{ option.title }}
+      .item
+        input(v-model="user.name" placeholder="Name")
+      .item
+        select(v-model="user.role")
+          option(v-for="option in rooms" :value="option.id") {{ option.title }}
       //input(v-model="user.password" type="password" placeholder="Password")
-      button login
+      .item
+        button.button Login
 </template>
 
 <script>
@@ -53,4 +56,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../assets/variables';
+  .login-form {
+    padding: 1rem 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 12px 40px -8px rgba(0,0,0,0.2);
+  }
+  .item {
+    margin-bottom: 1.5rem;
+  }
+  input {
+    width: 100%;
+    height: 48px;
+    margin: 8px 0;
+    border: none;
+    border-bottom: 1px solid #555;
+    font-size: 18px;
+
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid $color-main;
+    }
+  }
+  select {
+    width: 100%;
+    height: 48px;
+    margin: 8px 0;
+    border: none;
+    border-bottom: 1px solid #555;
+    font-size: 18px;
+
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid $color-main;
+    }
+  }
+  .button {
+    width: 100%;
+    border-radius: 1.5rem;
+  }
 </style>

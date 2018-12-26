@@ -4,15 +4,23 @@ import Vuex from 'vuex'
 import * as types from './mutation.types'
 
 const state = () => ({
+  workflow: 'public',
   user: {
     isGuest: true,
+    isAdmin: false,
     loaded: false,
     name: '',
-    room: {
-      id: undefined,
-      title: undefined
-    }
-  }
+    chat: undefined
+  },
+  chat: {
+    id: undefined,
+    title: undefined
+  },
+  room: {
+    id: undefined,
+    title: undefined
+  },
+  suspects: {}
 })
 
 const mutations = {
@@ -35,6 +43,18 @@ const mutations = {
         title: undefined
       }
     }
+  },
+  [types.WORKFLOW_CHANGED] (state, workflow) {
+    state.workflow = workflow
+  },
+  [types.SUSPECTS_LOADED] (state, suspects) {
+    state.suspects = suspects
+  },
+  [types.CHAT_LOADED] (state, chat) {
+    state.chat = chat
+  },
+  [types.ROOM_LOADED] (state, room) {
+    state.room = room
   }
 }
 

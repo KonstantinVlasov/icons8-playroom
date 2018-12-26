@@ -1,10 +1,13 @@
 const db = require('../database')
 const clients = require('./clients')
 
-function appInfo () {
+function info (role) {
   return db.get('rooms')
-    .filter({ private: true })
-    .map('name')
+    .filter({ id: role }).value()[0]
+}
+function chat () {
+  return db.get('rooms')
+    .filter({ id: 'public' }).value()[0]
 }
 
 module.exports = (client, io) => {
@@ -19,7 +22,9 @@ module.exports = (client, io) => {
     io.to(client.id).emit('user:info', {
       success: true,
       user: data,
-      info: appInfo()
+      room: info(data.role),
+      chat: chat(),
+      suspects: db.get('suspects')
     })
 
     client.join('public')

@@ -67,6 +67,7 @@ const config = {
     }
   },
   router: {
+    middleware: ['auth'],
     linkActiveClass: 'is-active',
     linkExactActiveClass: 'is-exact-active',
     scrollBehavior: function () {
