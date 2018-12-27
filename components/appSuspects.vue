@@ -1,5 +1,7 @@
 <template lang="pug">
   .app-suspects
+    app-suspect
+      app-evidences(:room="room")
     app-suspect(
       v-for="suspect in suspects"
       :key="suspect.id"
@@ -15,7 +17,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'WorkflowSelector',
+  name: 'AppSuspects',
   props: {
     room: {
       type: Object,
@@ -30,7 +32,7 @@ export default {
     })
   },
   mounted () {
-    console.log('mounted')
+    console.log('mounted AppSuspects')
     this.$socket.on('room:note', data => {
       console.log('room:note data', data)
       if (data.room === this.room.id) {

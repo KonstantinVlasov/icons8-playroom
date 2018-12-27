@@ -5,7 +5,7 @@
         .logo(v-html="$icons.logo")
         .logo-title Icons8 Playroom
       app-suspects(:room="room")
-      workflow-selector
+    workflow-selector
     app-room.is-public(
       v-if="workflow === 'public'"
       :room="chat"
@@ -47,8 +47,6 @@ export default {
         role: user.role
       })
     }
-  },
-  methods: {
   }
 }
 </script>
@@ -59,7 +57,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    right: 320px;
+    right: $width-room;
     bottom: 0;
     overflow-y: auto;
     background: linear-gradient(135deg, #fcc419, #ffe066);

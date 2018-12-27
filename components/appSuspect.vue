@@ -1,17 +1,17 @@
 <template lang="pug">
   .app-suspect
-    .header
-      img.preview(:src="suspect.image")
-      .name {{ suspect.name }}
-        .description {{ suspect.description }}
+    slot
+      .header
+        img.preview(:src="suspect.image")
+        .name {{ suspect.name }}
+          .description {{ suspect.description }}
 
-    message-list(
-      :messages="room.suspects.filter(s => s.suspect === suspect.id)"
-      :show-name="false"
-    )
+      message-list.is-short(
+        :messages="room.suspects.filter(s => s.suspect === suspect.id)"
+      )
 
-    .add-note.button(v-if="!addingNote" @click="openNote") Add note
-    send-message(v-if="addingNote" placeholder="Note" @send="sendMessage(suspect.id, $event)")
+      .add-note.button(v-if="!addingNote" @click="openNote") Add note
+      send-message(v-if="addingNote" placeholder="Note" @send="sendMessage(suspect.id, $event)")
 
 </template>
 
@@ -19,7 +19,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'WorkflowSelector',
+  name: 'AppSuspect',
   props: {
     suspect: {
       type: Object,
@@ -68,6 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../assets/variables.scss';
   .app-suspect {
     flex: 1;
     display: flex;
@@ -93,7 +94,7 @@ export default {
   .header {
     display: flex;
     width: 100%;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
   .preview {
     width: 48px;
@@ -121,6 +122,14 @@ export default {
   .message-list {
     width: 100%;
     flex: 1;
+    padding-left: 0.5rem;
     margin-bottom: 1rem;
+    border-left: 2px solid $color-main;
+    &:empty {
+      border: none;
+    }
+  }
+  .send-message {
+    width: 100%;
   }
 </style>

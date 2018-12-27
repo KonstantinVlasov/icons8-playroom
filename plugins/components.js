@@ -2,6 +2,7 @@ import Vue from 'vue'
 import socket from './socket.io.js'
 import icons from './icons.js'
 
+import appEvidences from '../components/appEvidences'
 import appRoom from '../components/appRoom'
 import appSuspect from '../components/appSuspect'
 import appSuspects from '../components/appSuspects'
@@ -14,6 +15,7 @@ export default ({ store }) => {
   Vue.use(socket, { store })
   Vue.use(icons())
 
+  Vue.component('app-evidences', appEvidences)
   Vue.component('app-room', appRoom)
   Vue.component('app-suspect', appSuspect)
   Vue.component('app-suspects', appSuspects)

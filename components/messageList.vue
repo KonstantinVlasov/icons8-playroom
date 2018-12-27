@@ -1,9 +1,8 @@
 <template lang="pug">
   .message-list
-    //.message.is-announce(v-if="!messages.length") No messages yet
     .message(
       v-for="message in messages"
-      :class="{'is-my': message.user !== user.name, 'is-hide-name': !showName}"
+      :class="{'is-my': message.user !== user.name}"
     ) {{ message.message }}
       .name {{message.user}}
 </template>
@@ -19,10 +18,6 @@ export default {
       'default': () => {
         return []
       }
-    },
-    showName: {
-      type: Boolean,
-      'default': true
     }
   },
   computed: {
@@ -35,6 +30,21 @@ export default {
 
 <style lang="scss" scoped>
   @import '../assets/variables.scss';
+  .message-list {
+    &.is-short {
+      .message {
+        width: 100%;
+        margin-left: 0;
+        padding: 0;
+        margin-bottom: 0.75rem;
+        box-shadow: none;
+        .name {
+          display: none;
+        }
+      }
+    }
+  }
+
   .message {
     position: relative;
     width: calc(100% - 3rem);
@@ -44,17 +54,8 @@ export default {
     font-size: 14px;
     background: white;
     box-shadow: 0 4px 16px -8px rgba(0,0,0,0.2);
-    &.is-announce {
-      //margin: 0 auto;
-    }
     &.is-my {
       margin-left: 3rem;
-      .name {
-        display: none;
-      }
-    }
-    &.is-hide-name {
-      margin-bottom: 0.5rem;
       .name {
         display: none;
       }

@@ -1,6 +1,6 @@
 <template lang="pug">
   .app-room
-    .title {{ room.title || room.id || 'undefined' }} Chat
+    .title {{ room.title || room.id || 'undefined' }} чат
     template(v-if="room")
       message-list(:messages="room.messages")
       send-message(@send="sendMessage")
@@ -57,7 +57,7 @@ export default {
     right: 0;
     bottom: 0;
     overflow-y: auto;
-    width: 320px;
+    width: $width-room;
     background: #f2f4f8;
   }
   .title {

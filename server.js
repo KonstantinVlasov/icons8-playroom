@@ -3,7 +3,7 @@ const app = express()
 const http = require('http').Server(app)
 const { Nuxt, Builder } = require('nuxt')
 const io = require('socket.io')(http)
-const socket = require('app/socket')
+const socket = require('./app/socket')
 
 app.get('/api', function (req, res) {
   res.send('<h1>Hello world</h1>')

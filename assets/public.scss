@@ -20,6 +20,17 @@ body {
   bottom: 0;
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: rgba(0,0,0,0.3);
+}
+::-webkit-scrollbar-track {
+}
+
 input, select, textarea {
   &:focus {
     outline: none;
