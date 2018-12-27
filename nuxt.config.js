@@ -36,6 +36,7 @@ const config = {
   render: {
     resourceHints: false
   },
+  buildDir: '.nuxt',
   build: {
     publicPath: '/_nuxt/playroom/',
     filenames: {
