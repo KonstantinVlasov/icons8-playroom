@@ -37,7 +37,7 @@ const config = {
     resourceHints: false
   },
   build: {
-    publicPath: '/_nuxt/landings/',
+    publicPath: '/_nuxt/playroom/',
     filenames: {
       app: ({ isDev }) => isDev ? '[name].js' : '[name].[chunkhash].js',
       chunk: ({ isDev }) => isDev ? '[name].js' : '[name].[chunkhash].js',
@@ -45,29 +45,6 @@ const config = {
       img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[name].[hash:7].[ext]',
       font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[name].[hash:7].[ext]',
       video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[name].[hash:7].[ext]'
-    },
-    extend (config) {
-      // config.plugins = config.plugins || []
-      //
-      // // remove svg from url-loader
-      // const rule = config.module.rules.find(r => r.test.toString() === '/\\.(png|jpe?g|gif|svg|webp)$/')
-      // rule.test = /\.(png|jpe?g|gif|webp)$/
-      //
-      // // use svg-sprite-loader instead
-      // config.module.rules.unshift({
-      //   test: /\.svg$/,
-      //   use: 'svg-inline-loader',
-      //   exclude: /node_modules/
-      // })
-      // // use url-loader for svg only for npm packages
-      // config.module.rules.push({
-      //   test: /(.*node_modules)(.*svg)(\?.*)?$/,
-      //   loader: 'url-loader',
-      //   query: {
-      //     limit: 10000,
-      //     name: 'imgs/[name].[hash:7].[ext]'
-      //   }
-      // })
     }
   },
   router: {
