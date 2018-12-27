@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const http = require('http').Server(app)
 const { Nuxt, Builder } = require('nuxt')
-const io = require('socket.io')(http)
+const io = require('socket.io')(http, { path: '/playroom/socket.io' })
 const socket = require('./app/socket')
 
 app.get('/api', function (req, res) {

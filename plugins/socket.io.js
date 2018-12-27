@@ -2,7 +2,7 @@ import io from 'socket.io-client'
 
 import * as types from '../store/mutation.types'
 
-const socket = io()
+const socket = io.connect({ path: '/playroom/socket.io' })
 
 export default {
   install (Vue, { store }) {
