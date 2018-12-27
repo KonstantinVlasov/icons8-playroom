@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "build": "cross-env NODE_ENV=production nuxt build",
-    "start": "ross-env NODE_ENV=production node server.js"
+    "start": "cross-env NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
