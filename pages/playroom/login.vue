@@ -18,7 +18,7 @@ export default {
     isGuest () {
       console.log('this.isGuest', this.isGuest)
       if (!this.isGuest) {
-        this.$router.push('/')
+        this.$router.push('/playroom')
       }
     }
   }
