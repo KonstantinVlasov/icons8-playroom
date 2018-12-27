@@ -37,10 +37,14 @@ const config = {
     resourceHints: false
   },
   build: {
-    optimization: {
-      splitChunks: {
-        name: true
-      }
+    publicPath: '/_nuxt/landings/',
+    filenames: {
+      app: ({ isDev }) => isDev ? '[name].js' : '[name].[chunkhash].js',
+      chunk: ({ isDev }) => isDev ? '[name].js' : '[name].[chunkhash].js',
+      css: ({ isDev }) => isDev ? '[name].css' : '[name].[contenthash].css',
+      img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[name].[hash:7].[ext]',
+      font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[name].[hash:7].[ext]',
+      video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[name].[hash:7].[ext]'
     },
     extend (config) {
       // config.plugins = config.plugins || []

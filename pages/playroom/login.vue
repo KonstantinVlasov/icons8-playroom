@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../assets/variables';
+  @import '../../assets/variables';
   .login-page {
     position: absolute;
     top: 0;

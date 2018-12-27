@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../assets/variables';
+  @import '../../assets/variables';
   .content {
     position: absolute;
     top: 0;
