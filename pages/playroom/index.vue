@@ -41,7 +41,7 @@ export default {
   mounted () {
     console.log('user login')
     const user = JSON.parse(window.localStorage.getItem('playroom.user'))
-    if (user.name) {
+    if (user && user.name) {
       this.$socket.emit('user:login', {
         name: user.name,
         role: user.role
