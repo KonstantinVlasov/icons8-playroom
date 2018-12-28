@@ -2,7 +2,6 @@ const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('data.json')
 const db = low(adapter)
-const descriptions = require('./descrptions')
 
 db.defaults({
   gameState: {
@@ -31,7 +30,7 @@ db.defaults({
     name: 'Кирилл Казачек',
     description: 'Главный актер',
     image: 'https://ca.slack-edge.com/T0B5D49AB-U3QNCAT53-f037f0008de7-48',
-    brief: descriptions[1]
+    brief: ''
   }, {
     id: 2,
     login: 'crew2',
@@ -39,7 +38,7 @@ db.defaults({
     name: 'Маргарита Иванчикова',
     description: 'Главный актриса',
     image: 'https://icons8.com/vue-static/landings/about/team/team4.jpg',
-    brief: descriptions[2]
+    brief: ''
   }, {
     id: 3,
     login: 'crew3',
@@ -141,7 +140,7 @@ db.defaults({
     private: true,
     messages: [],
     suspects: [],
-    evidences: ['У убийцы нет ручной змеи']
+    evidences: []
   }, {
     id: 'mi6',
     title: 'Агенты МИ6',
