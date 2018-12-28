@@ -45,9 +45,9 @@ export default {
 
 <style lang="scss" scoped>
   .app-suspects {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: flex-start;
-    justify-content: space-between;
+    columns: 280px;
+    column-fill: auto;
+    column-gap: 24px;
+    padding: 0 1.5rem;
   }
 </style>

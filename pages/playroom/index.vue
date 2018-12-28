@@ -4,14 +4,24 @@
       .header
         .logo(v-html="$icons.logo")
         .logo-title Icons8 Playroom
-      app-suspects(:room="room")
-    workflow-selector
+        .welcome Привет {{ user.name }}!
+      img.movie-picture(
+        v-if="gameState.content === 'movie-picture'"
+        src="/vue-static/playroom/movie-picture.jpg"
+      )
+      .final-preview(v-if="gameState.content === 'final'")
+        img(:src="currentFinal")
+      app-suspects(
+        v-if="gameState.content === 'suspects'"
+        :room="room"
+      )
+    state-control(v-if="user.isAdmin")
     app-room.is-public(
-      v-if="workflow === 'public'"
+      v-if="gameState.room === 'public'"
       :room="chat"
     )
     app-room.is-private(
-      v-if="workflow === 'private'"
+      v-if="gameState.room === 'private'"
       :room="room"
     )
 </template>
@@ -23,6 +33,9 @@ export default {
   name: 'IndexPage',
   data () {
     return {
+      final: ['01.jpg', '02.jpg'],
+      currentIndex: 0,
+      isFinal: false
     }
   },
   computed: {
@@ -30,8 +43,11 @@ export default {
       user: (state) => state.user,
       chat: (state) => state.chat,
       room: (state) => state.room,
-      workflow: (state) => state.workflow
-    })
+      gameState: (state) => state.gameState
+    }),
+    currentFinal () {
+      return `/vue-static/playroom/final/${this.final[this.currentIndex]}`
+    }
   },
   watch: {
     user () {
@@ -40,12 +56,27 @@ export default {
   },
   mounted () {
     console.log('user login')
-    const user = JSON.parse(window.localStorage.getItem('playroom.user'))
-    if (user && user.name) {
-      this.$socket.emit('user:login', {
-        name: user.name,
-        role: user.role
-      })
+    if (this.user.isGuest) {
+      const user = JSON.parse(window.localStorage.getItem('playroom.user'))
+      if (user && user.name) {
+        this.$socket.emit('user:login', {
+          name: user.name,
+          role: user.role,
+          password: user.password
+        })
+      }
+    }
+    this.nextSlide()
+  },
+  methods: {
+    nextSlide () {
+      setTimeout(() => {
+        this.currentIndex++
+        if (this.currentIndex >= this.final.length) {
+          this.currentIndex = 0
+        }
+        this.nextSlide()
+      }, 250)
     }
   }
 }
@@ -66,7 +97,7 @@ export default {
     display: flex;
     align-items: center;
     height: 56px;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
   }
   .logo {
     width: 30px;
@@ -79,15 +110,33 @@ export default {
     font-weight: 400;
     color: white;
   }
+  .welcome {
+    flex: 1;
+    text-align: right;
+    font-weight: 400;
+    color: white;
+  }
   .message-form {
     position: fixed;
     bottom: 0;
     width: 100%;
     padding: 4px;
   }
-  .workflow-selector {
+  .state-control {
     position: absolute;
     bottom: 1rem;
     left: 1rem;
+  }
+  .movie-picture {
+    width: 100%;
+  }
+  .final-preview {
+    padding-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      border-radius: 2rem;
+    }
   }
 </style>

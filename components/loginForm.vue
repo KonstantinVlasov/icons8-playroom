@@ -6,35 +6,37 @@
       .item
         select(v-model="user.role")
           option(v-for="option in rooms" :value="option.id") {{ option.title }}
-      //input(v-model="user.password" type="password" placeholder="Password")
+      .item
+        input(v-model="user.password" type="password" placeholder="Password")
       .item
         button.button Login
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'LoginForm',
   data () {
     return {
       user: {
         name: undefined,
-        // password: undefined,
+        password: undefined,
         role: undefined
-      },
-      rooms: [{
-        id: 'film', title: 'Film Crew'
-      }, {
-        id: 'cia', title: 'CIA Agents'
-      }, {
-        id: 'mi6', title: 'MI6 Agents'
-      }]
+      }
     }
+  },
+  computed: {
+    ...mapState({
+      rooms: (state) => state.rooms
+    })
   },
   mounted () {
     try {
       const user = JSON.parse(window.localStorage.getItem('playroom.user'))
       this.user.name = user.name
       this.user.role = user.role
+      this.user.password = user.password
     } catch {
       window.localStorage.removeItem('playroom.user')
     }
@@ -48,7 +50,8 @@ export default {
       })
       window.localStorage.setItem('playroom.user', JSON.stringify({
         name: this.user.name,
-        role: this.user.role
+        role: this.user.role,
+        password: this.user.password
       }))
     }
   }
@@ -64,7 +67,7 @@ export default {
     box-shadow: 0 12px 40px -8px rgba(0,0,0,0.2);
   }
   .item {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
   input {
     width: 100%;

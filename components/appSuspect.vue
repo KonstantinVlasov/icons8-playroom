@@ -1,17 +1,18 @@
 <template lang="pug">
   .app-suspect
-    slot
-      .header
-        img.preview(:src="suspect.image")
-        .name {{ suspect.name }}
-          .description {{ suspect.description }}
+    .content
+      slot
+        .header
+          img.preview(:src="suspect.image")
+          .name {{ suspect.name }}
+            .description {{ suspect.description }}
 
-      message-list.is-short(
-        :messages="room.suspects.filter(s => s.suspect === suspect.id)"
-      )
+        message-list.is-short(
+          :messages="room.suspects.filter(s => s.suspect === suspect.id)"
+        )
 
-      .add-note.button(v-if="!addingNote" @click="openNote") Add note
-      send-message(v-if="addingNote" placeholder="Note" @send="sendMessage(suspect.id, $event)")
+        .add-note.button(v-if="!addingNote" @click="openNote") Add note
+        send-message(v-if="addingNote" placeholder="Note" @send="sendMessage(suspect.id, $event)")
 
 </template>
 
@@ -70,16 +71,12 @@ export default {
 <style lang="scss" scoped>
   @import '../assets/variables.scss';
   .app-suspect {
+    display: inline-block;
     flex: 1;
-    display: flex;
-    flex-flow: column wrap;
-    align-items: flex-end;
-    min-width: 280px;
-    min-height: 170px;
+    width: 100%;
     background: white;
-    padding: 1rem;
     border-radius: 0.5rem;
-    margin: 0 16px 32px;
+    margin-bottom: 24px;
     box-shadow: 0 12px 40px -8px rgba(0,0,0,0.2);
 
     &.is-empty {
@@ -90,6 +87,13 @@ export default {
       background: none;
       min-height: 0;
     }
+  }
+  .content {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-end;
+    min-height: 170px;
+    padding: 1rem;
   }
   .header {
     display: flex;
@@ -124,7 +128,7 @@ export default {
     flex: 1;
     padding-left: 0.5rem;
     margin-bottom: 1rem;
-    border-left: 2px solid $color-main;
+    border-left: 3px solid $color-main;
     &:empty {
       border: none;
     }

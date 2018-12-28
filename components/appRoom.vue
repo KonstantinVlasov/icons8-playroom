@@ -1,6 +1,8 @@
 <template lang="pug">
   .app-room
-    .title {{ room.title || room.id || 'undefined' }} чат
+    .title {{ room.title || room.id || 'undefined' }}
+    .description(v-if="room.id === 'public'") Это общий чат, сообщения видны всем участникам игры
+    .description(v-if="room.id !== 'public'") Это <b>приватный</b> чат, сообщения видны только вашей команде
     template(v-if="room")
       message-list(:messages="room.messages")
       send-message(@send="sendMessage")
@@ -30,6 +32,8 @@ export default {
       console.log('room:message data', data)
       if (data.room === this.room.id) {
         this.room.messages.push({ message: data.message, user: data.user })
+        console.log('this.$el', this.$el)
+        this.$el.scrollTop = this.$el.scrollHeight + 60
       }
     })
   },
@@ -56,22 +60,29 @@ export default {
     top: 0;
     right: 0;
     bottom: 0;
-    overflow-y: auto;
+    overflow-y: scroll;
     width: $width-room;
+    padding-bottom: 120px;
     background: #f2f4f8;
   }
   .title {
     font-size: 24px;
     padding: 1rem;
   }
+  .description {
+    padding: 0 1rem 1rem;
+    b {
+      font-weight: 600;
+    }
+  }
   .message-list {
     padding: 1rem;
   }
   .send-message {
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    left: 0;
     right: 0;
+    width: $width-room;
     padding: 1rem 1rem 0.675rem;
     background: #f7f9fd;
     border-top: 1px solid rgba(0,0,0,0.05);

@@ -2,7 +2,7 @@
   .message-list
     .message(
       v-for="message in messages"
-      :class="{'is-my': message.user !== user.name}"
+      :class="{'is-my': message.user === user.name}"
     ) {{ message.message }}
       .name {{message.user}}
 </template>

@@ -9,7 +9,7 @@ import appSuspects from '../components/appSuspects'
 import loginForm from '../components/loginForm'
 import messageList from '../components/messageList'
 import sendMessage from '../components/sendMessage'
-import workflowSelector from '../components/workflowSelector'
+import stateControl from '../components/stateControl'
 
 export default ({ store }) => {
   Vue.use(socket, { store })
@@ -22,5 +22,5 @@ export default ({ store }) => {
   Vue.component('login-form', loginForm)
   Vue.component('message-list', messageList)
   Vue.component('send-message', sendMessage)
-  Vue.component('workflow-selector', workflowSelector)
+  Vue.component('state-control', stateControl)
 }

@@ -2,8 +2,14 @@ const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('data.json')
 const db = low(adapter)
+const descriptions = require('./descrptions')
 
 db.defaults({
+  gameState: {
+    title: 'Знакомство',
+    room: 'public',
+    content: 'suspects'
+  },
   users: [{
     name: 'admin',
     password: 123,
@@ -13,6 +19,7 @@ db.defaults({
     id: 0,
     login: 'crew0',
     password: '01',
+    isAdmin: true,
     name: 'Константин Власов',
     description: 'Режиссер',
     image: 'https://icons8.com/vue-static/landings/about/team/team5.jpg',
@@ -24,7 +31,7 @@ db.defaults({
     name: 'Кирилл Казачек',
     description: 'Главный актер',
     image: 'https://ca.slack-edge.com/T0B5D49AB-U3QNCAT53-f037f0008de7-48',
-    brief: ''
+    brief: descriptions[1]
   }, {
     id: 2,
     login: 'crew2',
@@ -32,7 +39,7 @@ db.defaults({
     name: 'Маргарита Иванчикова',
     description: 'Главный актриса',
     image: 'https://icons8.com/vue-static/landings/about/team/team4.jpg',
-    brief: ''
+    brief: descriptions[2]
   }, {
     id: 3,
     login: 'crew3',
@@ -99,13 +106,23 @@ db.defaults({
     brief: ''
   }],
   evidences: [
-    'улика 1',
-    'улика 2',
-    'улика 3',
-    'улика 4',
-    'улика 5',
-    'улика 6',
-    'улика 7'
+    'У убийцы нет кота',
+    'У убийцы нет домашнего паука',
+    'У убийцы нет ручной змеи',
+    'У убийцы нет собаки',
+    'Убийца раньше нигде не работал',
+    'Убийца любит сниматься',
+    'Убийца не любит фотографироваться',
+    'У убийцы есть свой дом',
+    'У убийцы дорогая машина',
+    'Убийца не любит пить воду',
+    'Убийца любит петь',
+    'Убийца умееет стрелять',
+    'Убийца не сидел в тюрьме',
+    'Убийца любит играть в карты',
+    'У убийцы нет братьев/сестер',
+    'У убийцы нет жены/мужа',
+    'Убийца любит флиртовать'
   ],
   rooms: [{
     id: 'public',
@@ -113,21 +130,21 @@ db.defaults({
     messages: []
   }, {
     id: 'film',
-    title: 'Film Group',
+    title: 'Съемочая группа',
     private: true,
     messages: [],
     suspects: [],
     evidences: []
   }, {
     id: 'cia',
-    title: 'CIA Agents',
+    title: 'Агенты ЦРУ',
     private: true,
     messages: [],
     suspects: [],
-    evidences: ['Убийца хорошо стреляет']
+    evidences: ['У убийцы нет ручной змеи']
   }, {
     id: 'mi6',
-    title: 'MI6 Agents',
+    title: 'Агенты МИ6',
     private: true,
     users: ['admin'],
     messages: [],

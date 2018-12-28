@@ -1,6 +1,7 @@
 <template lang="pug">
   .login-page
     .logo(v-html="$icons.logo")
+    .title Icons8 Playroom
     login-form
 </template>
 
@@ -33,7 +34,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    padding-bottom: 15rem;
+    padding-bottom: 13rem;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -49,7 +50,13 @@ export default {
     background: white;
     border-radius: 1.5rem;
     box-shadow: 0 1px 24px -8px rgba(0,0,0,0.3);
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
+  }
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1rem;
   }
   .login-form {
     width: 300px;

@@ -12,7 +12,12 @@ function chat () {
 
 module.exports = (client, io) => {
   client.on('user:login', data => {
-    console.log('login data', data)
+    console.log('server.user:login login data', data)
+
+    const user = db.get('suspects')
+      .filter({ login: data.name, password: data.password }).value()[0]
+    console.log('user', user)
+
     clients[data.name] = {
       'socket': client.id,
       name: data.name,
@@ -21,10 +26,12 @@ module.exports = (client, io) => {
 
     io.to(client.id).emit('user:info', {
       success: true,
-      user: data,
+      user: user || data,
       room: info(data.role),
+      rooms: db.get('rooms').filter({ private: true }).value(),
       chat: chat(),
-      suspects: db.get('suspects')
+      suspects: db.get('suspects'),
+      gameState: db.get('gameState')
     })
 
     client.join('public')
