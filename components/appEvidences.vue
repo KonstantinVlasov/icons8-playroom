@@ -1,32 +1,25 @@
 <template lang="pug">
   .app-evidences
-    .title Доступные улики
+    .title Психологический портрет
     ul
       li.evidence(
-        v-for="evidence in room.evidences"
+        v-for="evidence in evidences"
       ) {{ evidence }}
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'AppEvidences',
-  props: {
-    room: {
-      type: Object,
-      'default': () => {
-        return {}
-      }
+  data () {
+    return {
+      evidences: [
+        'Живет сегодняшним днем и пытается извлечь удовольствие из всего что возможно, авантюрист',
+        'Не расположен к искреннему общению и скрывает большую часть своей жизни',
+        'Внешне очень слабо проявляет эмоции, хотя проблем в отношении с людьми не имеет',
+        'Легковнушаемый, склонен верить во все подряд',
+        'Достаточно самостоятельный, порой эгоистичный, умеет влиять на людей'
+      ]
     }
-  },
-  computed: {
-    ...mapState({
-      suspects: (state) => state.suspects
-    })
-  },
-  mounted () {
-    console.log('mounted AppEvidences')
   }
 }
 </script>
@@ -44,12 +37,19 @@ export default {
   }
   ul {
     list-style: none;
-    padding-left: 1rem;
+    padding-left: 0.75rem;
   }
-  li:before {
-    content: "•";
-    display: inline-block; width: 1em;
-    margin-left: -1em;
-    color: black;
+  li {
+    margin-bottom: 0.25rem;
+    font-size: 14px;
+    line-height: 1.35;
+    font-weight: 400;
+    &:before {
+      content: "•";
+      display: inline-block;
+      width: 0.75em;
+      margin-left: -0.75em;
+      color: black;
+    }
   }
 </style>

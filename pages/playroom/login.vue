@@ -1,7 +1,8 @@
 <template lang="pug">
   .login-page
-    .logo(v-html="$icons.logo")
-    .title Icons8 Playroom
+    img.title(
+      src="/vue-static/playroom/licons-9.png"
+    )
     login-form
 </template>
 
@@ -40,11 +41,11 @@ export default {
     align-items: center;
     justify-content: center;
     background: $color-main;
-    background: linear-gradient(to bottom, #fab005 0%,$color-main 42%,#ffffff 42%,#ffffff 100%);
+    //background: linear-gradient(to bottom, #fab005 0%,$color-main 42%,#ffffff 42%,#ffffff 100%);
+    background: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
   }
   .logo {
     fill: $color-main;
-    width: 120px;
     height: 120px;
     padding: 1rem;
     background: white;
@@ -53,12 +54,10 @@ export default {
     margin-bottom: 1rem;
   }
   .title {
-    font-size: 24px;
-    font-weight: 600;
-    color: white;
+    width: 240px;
     margin-bottom: 1rem;
   }
   .login-form {
-    width: 300px;
+    width: 320px;
   }
 </style>

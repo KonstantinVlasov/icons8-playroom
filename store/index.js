@@ -21,35 +21,18 @@ const state = () => ({
     title: undefined
   },
   rooms: [{
-    id: 'cia', title: 'Агенты ЦРУ'
+    id: 'team1', title: 'Отдел Зайчата'
   }, {
-    id: 'mi6', title: 'Агенты МИ6'
+    id: 'team2', title: 'Отдел Пиу-пиу'
   }, {
-    id: 'film', title: 'Съемочая группа'
+    id: 'team3', title: 'Отдел Пуньк'
   }],
   suspects: {},
-  evidences: [
-    'У убийцы нет кота',
-    'У убийцы нетдомашнего паука',
-    'У убийцы нет ручной змеи',
-    'У убийцы нет собаки',
-    'Убийца раньше нигде не работал',
-    'Убийца любит сниматься',
-    'Убийца не любит фотографироваться',
-    'У убийцы есть свой дом',
-    'У убийцы дорогая машина',
-    'Убийца не любит пить воду',
-    'Убийца любит петь',
-    'Убийца умееет стрелять',
-    'Убийца не сидел в тюрьме',
-    'Убийца любит играть в карты',
-    'У убийцы нет братьев/сестер',
-    'У убийцы нет жены/мужа',
-    'Убийца любит флиртовать'
-  ],
+  evidences: undefined,
+  evidences1: undefined,
   gameState: {
     title: 'Знакомство',
-    room: 'public',
+    room: 'private',
     content: 'suspects'
   },
   gameStates: {
@@ -58,42 +41,7 @@ const state = () => ({
       room: 'public',
       content: 'suspects'
     },
-    2: {
-      title: 'Конкурс саундтреков',
-      room: 'public',
-      content: 'suspects'
-    },
     3: {
-      title: 'Допросы',
-      room: 'private',
-      content: 'suspects'
-    },
-    4: {
-      title: 'Конкурс по картинке',
-      room: 'public',
-      content: 'movie-picture'
-    },
-    5: {
-      title: 'Допросы',
-      room: 'private',
-      content: 'suspects'
-    },
-    6: {
-      title: 'Конкурс на П',
-      room: 'public',
-      content: 'suspects'
-    },
-    7: {
-      title: 'Допросы',
-      room: 'private',
-      content: 'suspects'
-    },
-    8: {
-      title: 'Конкурс иконок',
-      room: 'public',
-      content: 'suspects'
-    },
-    9: {
       title: 'Допросы',
       room: 'private',
       content: 'suspects'
@@ -136,8 +84,11 @@ const mutations = {
   [types.SUSPECTS_LOADED] (state, suspects) {
     state.suspects = suspects
   },
-  [types.SUSPECTS_LOADED] (state, suspects) {
-    state.suspects = suspects
+  [types.EVIDENCES_LOADED] (state, evidences) {
+    state.evidences = evidences
+  },
+  [types.EVIDENCES1_LOADED] (state, evidences) {
+    state.evidences1 = evidences
   },
   [types.CHAT_LOADED] (state, chat) {
     state.chat = chat

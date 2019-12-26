@@ -1,5 +1,3 @@
-const db = require('./database')
-
 const clients = require('./socket/clients')
 const roomManager = require('./socket/roomManager')
 const userManager = require('./socket/userManager')

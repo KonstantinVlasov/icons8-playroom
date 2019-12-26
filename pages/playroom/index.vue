@@ -2,9 +2,11 @@
   .index-page
     .content
       .header
-        .logo(v-html="$icons.logo")
-        .logo-title Icons8 Playroom
-        .welcome Привет {{ user.name }}!
+        img.logo(
+          src="/vue-static/playroom/licons-9.png"
+        )
+        .welcome Привет, {{ user.name }}!
+          .logout(@click="logout") logout
       img.movie-picture(
         v-if="gameState.content === 'movie-picture'"
         src="/vue-static/playroom/movie-picture.jpg"
@@ -77,6 +79,11 @@ export default {
         }
         this.nextSlide()
       }, 250)
+    },
+    logout () {
+      console.log('logout')
+      window.localStorage.removeItem('playroom.user')
+      window.location.reload()
     }
   }
 }
@@ -91,24 +98,19 @@ export default {
     right: $width-room;
     bottom: 0;
     overflow-y: auto;
-    background: linear-gradient(135deg, #fcc419, #ffe066);
+    padding-bottom: 220px;
+    background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
   }
   .header {
     display: flex;
     align-items: center;
-    height: 56px;
+    height: 60px;
     padding: 0 1.5rem;
   }
   .logo {
-    width: 30px;
-    height: 30px;
+    height: 44px;
     fill: white;
     margin-right: 0.5rem;
-  }
-  .logo-title {
-    font-size: 18px;
-    font-weight: 400;
-    color: white;
   }
   .welcome {
     flex: 1;
@@ -138,5 +140,13 @@ export default {
     img {
       border-radius: 2rem;
     }
+  }
+  .logout {
+    display: inline-block;
+    margin-left: 24px;
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
   }
 </style>

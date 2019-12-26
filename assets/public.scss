@@ -12,7 +12,7 @@ body {
   color: #000;
   line-height: 1.5;
   margin: 0;
-  background: #ffe066;
+  background: $color-main;
   position: absolute;
   top: 0;
   left: 0;
@@ -46,9 +46,9 @@ input, select, textarea {
   display: inline-block;
   position: relative;
   color: white;
-  //background: $color-main;
-  background: linear-gradient(135deg, #fab005 0%, $color-main 100%);
-  border: 1px solid transparent;
+  background: $color-main;
+  //background: linear-gradient(135deg, #fab005 0%, $color-main 100%);
+  background: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
   font-weight: 300;
   cursor: pointer;
   text-decoration: none;
@@ -56,14 +56,15 @@ input, select, textarea {
   text-align: center;
   transition: 0.3s all ease;
   vertical-align: middle;
+  border: none;
 
   &:hover {
-    //background: darken($color-main, 5%);
-    background: linear-gradient(135deg, darken(#fab005, 3%) 0%, darken($color-main, 3%) 100%);
+    background: darken($color-main, 5%);
+    //background: linear-gradient(135deg, darken(#fab005, 3%) 0%, darken($color-main, 3%) 100%);
+    background: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
   }
 
   &:focus {
     outline: none;
-    border: 1px solid #f59f00;
   }
 }

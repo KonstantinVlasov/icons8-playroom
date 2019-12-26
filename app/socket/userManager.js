@@ -14,8 +14,8 @@ module.exports = (client, io) => {
   client.on('user:login', data => {
     console.log('server.user:login login data', data)
 
-    const user = db.get('suspects')
-      .filter({ login: data.name, password: data.password }).value()[0]
+    const user = db.get('users')
+      .filter({ login: data.name/* , password: data.password */ }).value()[0]
     console.log('user', user)
 
     clients[data.name] = {
@@ -28,9 +28,11 @@ module.exports = (client, io) => {
       success: true,
       user: user || data,
       room: info(data.role),
-      rooms: db.get('rooms').filter({ private: true }).value(),
+      rooms: db.get('rooms'),
       chat: chat(),
       suspects: db.get('suspects'),
+      evidences: db.get('evidences'),
+      evidences1: db.get('evidences1'),
       gameState: db.get('gameState')
     })
 

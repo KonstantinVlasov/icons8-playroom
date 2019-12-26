@@ -1,12 +1,18 @@
 <template lang="pug">
   .login-form
     form(@submit.prevent="login")
+      .title Hello friend!
+      .desc Пожалуйста, введите полное имя и фамилию для удобства других игроков
       .item
-        input(v-model="user.name" placeholder="Name")
-      .item
+        input(
+          autofocus
+          v-model="user.name" placeholder=""
+          :class="{'is-error': emptyName}"
+        )
+      //.item
         select(v-model="user.role")
           option(v-for="option in rooms" :value="option.id") {{ option.title }}
-      .item
+      //.item
         input(v-model="user.password" type="password" placeholder="Password")
       .item
         button.button Login
@@ -23,7 +29,8 @@ export default {
         name: undefined,
         password: undefined,
         role: undefined
-      }
+      },
+      emptyName: false
     }
   },
   computed: {
@@ -43,6 +50,10 @@ export default {
   },
   methods: {
     login () {
+      if (!this.user.name) {
+        this.emptyName = true
+        return
+      }
       this.$socket.emit('user:login', {
         name: this.user.name,
         role: this.user.role,
@@ -61,10 +72,18 @@ export default {
 <style lang="scss" scoped>
   @import '../assets/variables';
   .login-form {
-    padding: 1rem 2rem;
+    padding: 2rem 2rem 1rem;
     background: white;
     border-radius: 1rem;
     box-shadow: 0 12px 40px -8px rgba(0,0,0,0.2);
+  }
+  .title {
+    font-size: 20px;
+    font-weight: 400;
+  }
+  .desc {
+    font-weight: 400;
+    font-size: 14px;
   }
   .item {
     margin-bottom: 1rem;
@@ -72,14 +91,17 @@ export default {
   input {
     width: 100%;
     height: 48px;
-    margin: 8px 0;
+    margin: 0 0 8px;
     border: none;
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid $color-main;
     font-size: 18px;
 
     &:focus {
       outline: none;
       border-bottom: 1px solid $color-main;
+    }
+    &.is-error {
+      border-bottom: 2px solid #e33100;
     }
   }
   select {
@@ -97,6 +119,6 @@ export default {
   }
   .button {
     width: 100%;
-    border-radius: 1.5rem;
+    border-radius: 0.5rem;
   }
 </style>

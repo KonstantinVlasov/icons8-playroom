@@ -7,12 +7,12 @@
           .name {{ suspect.name }}
             .description {{ suspect.description }}
 
-        message-list.is-short(
-          :messages="room.suspects.filter(s => s.suspect === suspect.id)"
-        )
+        //message-list.is-short(
+        //  :messages="room.suspects.filter(s => s.suspect === suspect.id)"
+        //)
 
-        .add-note.button(v-if="!addingNote" @click="openNote") Add note
-        send-message(v-if="addingNote" placeholder="Note" @send="sendMessage(suspect.id, $event)")
+        //.add-note.button(v-if="!addingNote" @click="openNote") Add note
+        //send-message(v-if="addingNote" placeholder="Note" @send="sendMessage(suspect.id, $event)")
 
 </template>
 
@@ -76,8 +76,8 @@ export default {
     width: 100%;
     background: white;
     border-radius: 0.5rem;
-    margin-bottom: 24px;
-    box-shadow: 0 12px 40px -8px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+    box-shadow: 0 12px 18px -8px rgba(0,0,0,0.2);
 
     &.is-empty {
       visibility: hidden;
@@ -92,13 +92,11 @@ export default {
     display: flex;
     flex-flow: column wrap;
     align-items: flex-end;
-    min-height: 170px;
-    padding: 1rem;
+    padding: 0.75rem;
   }
   .header {
     display: flex;
     width: 100%;
-    margin-bottom: 1rem;
   }
   .preview {
     width: 48px;

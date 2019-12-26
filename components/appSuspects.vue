@@ -1,16 +1,13 @@
 <template lang="pug">
   .app-suspects
     app-suspect
-      app-evidences(:room="room")
+      app-evidences
     app-suspect(
       v-for="suspect in suspects"
       :key="suspect.id"
       :suspect="suspect"
       :room="room"
     )
-    app-suspect.is-empty
-    app-suspect.is-empty
-    app-suspect.is-empty
 </template>
 
 <script>
@@ -45,9 +42,8 @@ export default {
 
 <style lang="scss" scoped>
   .app-suspects {
-    columns: 280px;
-    column-fill: auto;
-    column-gap: 24px;
+    columns: 300px;
+    column-gap: 20px;
     padding: 0 1.5rem;
   }
 </style>

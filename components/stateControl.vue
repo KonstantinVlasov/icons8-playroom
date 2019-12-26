@@ -7,19 +7,20 @@
       option(v-for="(option, i) in gameStates" :value="i") {{ option.title }}
     = ' '
     .button(@click="activateState") Activate state
-    br
-    br
-    select(v-model="evidence")
-      option(v-for="option in filteredEvidences" :value="option") {{ option }}
-    br
-    select(v-model="room")
-      option(v-for="option in rooms" :value="option.id") {{ option.title }}
-    = ' '
-    .button(@click="sendEvidence") Send Evidence
+    //br
+      br
+      select(v-model="evidence")
+        option(v-for="option in filteredEvidences" :value="option") {{ option }}
+      br
+      select(v-model="room")
+        option(v-for="option in rooms" :value="option.id") {{ option.title }}
+      = ' '
+      .button(@click="sendEvidence") Send Evidence
+
+    //.evidences(v-for="evidence in evidences") {{ evidence.userId }}: {{ evidence.text }} - {{ evidence.proof }}
 </template>
 
 <script>
-import * as types from '../store/mutation.types'
 import { mapState } from 'vuex'
 
 export default {
@@ -60,7 +61,6 @@ export default {
   methods: {
     activateState () {
       this.$socket.emit('game:state', this.gameStates[this.state])
-      // this.$store.commit(types.GAME_STATE_CHANGED, this.gameStates[this.state])
     },
     sendEvidence () {
       console.log('client sendEvidence')
@@ -81,6 +81,9 @@ export default {
     background: white;
     border-radius: 8px;
     box-shadow: 0 8px 48px -12px rgba(0,0,0,0.35);
+    height: 200px;
+    width: 480px;
+    overflow-y: auto;
   }
   .title {
     font-weight: 600;

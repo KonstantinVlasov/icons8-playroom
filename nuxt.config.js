@@ -1,6 +1,6 @@
 'use strict'
 
-const favicon = '/vue-static/playroom/icons8-dice-'
+const favicon = '/vue-static/playroom/licons-9-short'
 
 const config = {
   mode: 'spa',
@@ -17,10 +17,10 @@ const config = {
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge, chrome=1' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', hid: 'favicon-16', sizes: '16x16', href: `${favicon}16.png` },
-      { rel: 'icon', type: 'image/png', hid: 'favicon-32', sizes: '32x32', href: `${favicon}32.png` },
-      { rel: 'icon', type: 'image/png', hid: 'favicon-48', sizes: '96x96', href: `${favicon}48.png` },
-      { rel: 'icon', type: 'image/png', hid: 'favicon-96', sizes: '96x96', href: `${favicon}96.png` }
+      { rel: 'icon', type: 'image/png', hid: 'favicon-16', sizes: '16x16', href: `${favicon}.png` },
+      { rel: 'icon', type: 'image/png', hid: 'favicon-32', sizes: '32x32', href: `${favicon}.png` },
+      { rel: 'icon', type: 'image/png', hid: 'favicon-48', sizes: '96x96', href: `${favicon}.png` },
+      { rel: 'icon', type: 'image/png', hid: 'favicon-96', sizes: '96x96', href: `${favicon}.png` }
     ]
   },
   vendor: [
