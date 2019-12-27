@@ -3,6 +3,8 @@
     .title {{ room.title || room.id || 'undefined' }}
     .description(v-if="room.id === 'public'") Это общий чат, сообщения видны всем участникам игры
     .description(v-if="room.id !== 'public'") Это <b>приватный</b> чат, сообщения видны только вашей команде
+    .users Команда:
+      .user(v-for="user in roomUsers") {{ user.name }}
     template(v-if="room")
       message-list(:messages="room.messages")
       send-message(@send="sendMessage")
@@ -23,8 +25,12 @@ export default {
   },
   computed: {
     ...mapState({
-      user: (state) => state.user
-    })
+      user: (state) => state.user,
+      users: (state) => state.users
+    }),
+    roomUsers () {
+      return this.users.filter(user => user.room === this.room.id)
+    }
   },
   mounted () {
     console.log('mounted')
@@ -74,6 +80,11 @@ export default {
     b {
       font-weight: 600;
     }
+  }
+  .users {
+    padding: 0 1rem 1rem;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
   .message-list {
     padding: 1rem;

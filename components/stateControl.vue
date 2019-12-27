@@ -2,8 +2,15 @@
   .state-control
     .content.is-users
       .title Users
-      .users(v-for="user in users")
-        .user {{ user.room}} {{ user.name }}
+      .subtitle team 1
+      .users(v-for="user in users.filter(user => user.room === 'team1')")
+        .user {{ user.name }}
+      .subtitle team 2
+      .users(v-for="user in users.filter(user => user.room === 'team2')")
+        .user {{ user.name }}
+      .subtitle team 3
+      .users(v-for="user in users.filter(user => user.room === 'team3')")
+        .user {{ user.name }}
     .content.is-evidences
       .title Evidences
       .rooms
@@ -135,6 +142,10 @@ export default {
   .title {
     font-weight: 600;
     margin-bottom: 0.5rem;
+  }
+  .subtitle {
+    font-size: 12px;
+    font-weight: 600;
   }
   .user {
     font-size: 14px;
