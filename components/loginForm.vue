@@ -40,12 +40,12 @@ export default {
   },
   mounted () {
     try {
-      const user = JSON.parse(window.localStorage.getItem('playroom.user'))
+      const user = JSON.parse(window.localStorage.getItem('licons9.user'))
       this.user.name = user.name
       this.user.role = user.role
       this.user.password = user.password
     } catch {
-      window.localStorage.removeItem('playroom.user')
+      window.localStorage.removeItem('licons9.user')
     }
   },
   methods: {
@@ -59,7 +59,7 @@ export default {
         role: this.user.role,
         password: this.user.password
       })
-      window.localStorage.setItem('playroom.user', JSON.stringify({
+      window.localStorage.setItem('licons9.user', JSON.stringify({
         name: this.user.name,
         role: this.user.role,
         password: this.user.password

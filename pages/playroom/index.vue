@@ -59,7 +59,7 @@ export default {
   mounted () {
     console.log('user login')
     if (this.user.isGuest) {
-      const user = JSON.parse(window.localStorage.getItem('playroom.user'))
+      const user = JSON.parse(window.localStorage.getItem('licons9.user'))
       if (user && user.name) {
         this.$socket.emit('user:login', {
           name: user.name,
@@ -82,7 +82,7 @@ export default {
     },
     logout () {
       console.log('logout')
-      window.localStorage.removeItem('playroom.user')
+      window.localStorage.removeItem('licons9.user')
       this.$socket.emit('user:logout', {
         name: this.user.name
       })

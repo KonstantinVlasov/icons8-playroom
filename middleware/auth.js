@@ -4,7 +4,7 @@ import Vue from 'vue'
 
 export default ({ store, redirect, route }) => {
   if (route.path !== '/playroom/login' && store.state.user.isGuest) {
-    const user = JSON.parse(window.localStorage.getItem('playroom.user'))
+    const user = JSON.parse(window.localStorage.getItem('licons9.user'))
     console.log('middleware auth user', user)
     if (user && user.name) {
       Vue.$socket.emit('user:login', {

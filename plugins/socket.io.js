@@ -23,7 +23,7 @@ export default {
         store.commit(types.EVIDENCES1_LOADED, data.evidences1)
         store.commit(types.GAME_STATE_CHANGED, data.gameState)
       } else {
-        window.localStorage.setItem('playroom.user', undefined)
+        window.localStorage.setItem('licons9.user', undefined)
         redirect('/playroom/login')
       }
     })
