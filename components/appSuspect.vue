@@ -10,6 +10,13 @@
         //message-list.is-short(
         //  :messages="room.suspects.filter(s => s.suspect === suspect.id)"
         //)
+        .evidences
+          .evidence(
+            v-for="(evidence, i) in evidences(suspect)"
+            @click="selectEvidence(evidence)"
+          )
+            .select-evidence(:class="{'is-selected': evidence[`${room.id}checked`]}")
+            | {{ evidence.text }}
 
         //.add-note.button(v-if="!addingNote" @click="openNote") Add note
         //send-message(v-if="addingNote" placeholder="Note" @send="sendMessage(suspect.id, $event)")
@@ -49,6 +56,18 @@ export default {
   methods: {
     openNote () {
       this.addingNote = true
+    },
+    evidences (suspect) {
+      if (this.room.evidences) {
+        return this.room.evidences.filter(evidence => evidence.userId === suspect.id)
+      }
+    },
+    selectEvidence (evidence) {
+      this.$socket.emit('room:evidence:check', {
+        room: this.room.id,
+        evidence: evidence.id,
+        checked: !evidence.checked
+      })
     },
     sendMessage (suspect, message) {
       console.log('suspect', suspect)
@@ -91,7 +110,6 @@ export default {
   .content {
     display: flex;
     flex-flow: column wrap;
-    align-items: flex-end;
     padding: 0.75rem;
   }
   .header {
@@ -133,5 +151,51 @@ export default {
   }
   .send-message {
     width: 100%;
+  }
+  .evidences {
+    list-style: none;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+  .evidence {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.35;
+    cursor: pointer;
+  }
+  .select-evidence {
+    position: relative;
+    display: inline-block;
+    margin-right: 6px;
+    height: 14px;
+    width: 14px;
+    vertical-align: sub;
+    background-color: #eee;
+    border: 1px solid #ccc;
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+
+      left: 4px;
+      top: 0;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    &.is-selected {
+      background-color: $color-main;
+      border: 1px solid $color-main;
+      &:after {
+        display: block;
+      }
+    }
   }
 </style>

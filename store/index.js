@@ -12,20 +12,22 @@ const state = () => ({
     name: '',
     chat: undefined
   },
+  users: [],
   chat: {
     id: undefined,
     title: undefined
   },
   room: {
     id: undefined,
-    title: undefined
+    title: undefined,
+    evidences: []
   },
   rooms: [{
-    id: 'team1', title: 'Отдел Зайчата'
+    id: 'team1', title: 'Отдел Зайчата', evidences: []
   }, {
-    id: 'team2', title: 'Отдел Пиу-пиу'
+    id: 'team2', title: 'Отдел Пиу-пиу', evidences: []
   }, {
-    id: 'team3', title: 'Отдел Пуньк'
+    id: 'team3', title: 'Отдел Пуньк', evidences: []
   }],
   suspects: {},
   evidences: undefined,
@@ -78,6 +80,9 @@ const mutations = {
   [types.GAME_STATE_CHANGED] (state, gameState) {
     state.gameState = gameState
   },
+  [types.USERS_LOADED] (state, users) {
+    state.users = users
+  },
   [types.ROOMS_LOADED] (state, rooms) {
     state.rooms = rooms
   },
@@ -96,6 +101,11 @@ const mutations = {
   [types.ROOM_LOADED] (state, room) {
     state.room = room
   },
+  [types.EVIDENCE_CHECKED] (state, data) {
+    console.log('EVIDENCE_CHECKED', data)
+    const evidence = state.room.evidences.find(evidence => evidence.id === data.evidence)
+    evidence[`${data.room}checked`] = data.checked
+  },
   [types.EVIDENCE_ADDED] (state, data) {
     const room = state.rooms.find(room => room.id === data.room)
     if (room) {
@@ -105,6 +115,19 @@ const mutations = {
     console.log('state.room.id', state.room.id)
     if (data.room === state.room.id) {
       state.room.evidences.push(data.evidence)
+    }
+  },
+  [types.NEW_EVIDENCES_ADDED] (state, data) {
+    const room = state.rooms.find(room => room.id === data.room)
+    if (room) {
+      room.evidences.push(...data.evidences.map(evidence => {
+        return { ...evidence, isNew: true }
+      }))
+    }
+    console.log('data.room', data.room)
+    console.log('state.room.id', state.room.id)
+    if (data.room === state.room.id) {
+      state.room.evidences.push(...data.evidences)
     }
   }
 }

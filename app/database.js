@@ -40,6 +40,14 @@ db.defaults({
   }]
 }).write()
 
+db.get('evidences')
+  .each((evidence) => {
+    evidence.team1checked = false
+    evidence.team2checked = false
+    evidence.team3checked = false
+  })
+  .write()
+
 function shuffle (array) {
   let currentIndex = array.length
   let temporaryValue

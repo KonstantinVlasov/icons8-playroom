@@ -83,6 +83,9 @@ export default {
     logout () {
       console.log('logout')
       window.localStorage.removeItem('playroom.user')
+      this.$socket.emit('user:logout', {
+        name: this.user.name
+      })
       window.location.reload()
     }
   }
@@ -128,6 +131,7 @@ export default {
     position: absolute;
     bottom: 1rem;
     left: 1rem;
+    right: $width-room;
   }
   .movie-picture {
     width: 100%;

@@ -1,5 +1,7 @@
 const db = require('../database')
 
+const evidences = db.get('evidences').value()
+
 module.exports = (client, io) => {
   client.on('room:message', data => {
     console.log('server.room:message')
@@ -40,6 +42,39 @@ module.exports = (client, io) => {
       .push(data.evidence)
       .write()
     io.to(data.room).emit('room:evidence', { evidence: data.evidence, room: data.room })
+  })
+
+  client.on('room:evidences', data => {
+    console.log('server.room:evidence', data)
+    data.rooms.forEach(obj => {
+      const room = db.get('rooms')
+        .find({ id: obj.id })
+        .value()
+      const start = room.evidences.length
+      const nextEvidences = evidences.slice(start, start + obj.amount)
+      db.get('rooms')
+        .find({ id: obj.id })
+        .get('evidences')
+        .push(...nextEvidences)
+        .write()
+      console.log('obj.id', obj.id)
+      io.to(obj.id).emit('room:evidences', { evidences: nextEvidences, room: obj.id })
+    })
+  })
+
+  client.on('room:evidence:check', data => {
+    console.log('server.room:evidence:check', data)
+    db.get('rooms')
+      .find({ id: data.room })
+      .get('evidences')
+      .find({ id: data.evidence })
+      .assign({ [`${data.room}checked`]: data.checked })
+      .write()
+    io.to(data.room).emit('room:evidence:check', {
+      room: data.room,
+      evidence: data.evidence,
+      checked: data.checked
+    })
   })
 
   client.on('game:state', data => {

@@ -16,6 +16,7 @@ export default {
         })
         store.commit(types.ROOM_LOADED, data.room)
         store.commit(types.CHAT_LOADED, data.chat)
+        store.commit(types.USERS_LOADED, data.users)
         store.commit(types.ROOMS_LOADED, data.rooms)
         store.commit(types.SUSPECTS_LOADED, data.suspects)
         store.commit(types.EVIDENCES_LOADED, data.evidences)
@@ -30,6 +31,16 @@ export default {
     socket.on('room:evidence', data => {
       console.log('client.room:evidence', data)
       store.commit(types.EVIDENCE_ADDED, data)
+    })
+
+    socket.on('room:evidences', data => {
+      console.log('client.room:evidences', data)
+      store.commit(types.NEW_EVIDENCES_ADDED, data)
+    })
+
+    socket.on('room:evidence:check', data => {
+      console.log('client.room:check', data)
+      store.commit(types.EVIDENCE_CHECKED, data)
     })
 
     socket.on('game:state', data => {
