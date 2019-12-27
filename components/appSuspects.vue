@@ -2,7 +2,7 @@
   .app-suspects
     app-suspect
       app-evidences
-      div(v-if="user.isAdmin" v-for="evidence in room.evidences") {{ evidence.userId }} {{evidence.text}}
+      //div(v-if="user.isAdmin" v-for="evidence in room.evidences") {{ evidence.userId }} {{evidence.text}}
     app-suspect(
       v-for="suspect in suspects"
       :key="suspect.id"
